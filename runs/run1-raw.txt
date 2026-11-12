@@ -1,0 +1,29 @@
+ERROR W1 [open-questions] L13 沒有來源標註：| Q6 | K-pop_fandom 網址抓回的是 K-pop 主條目 | 拒
+ERROR W5 [agencies-trainees] L14 數字 30 在 S3 找不到：- SM 每年在 9 個國家收到約 30 萬份報名 [S3]。
+ERROR W5 [agencies-trainees] L17 數字 300 在 S1/S3 找不到：- 2012 年《華爾街日報》估計培養一名偶像約需 300 萬美元 [S1][S3]。
+ERROR W5 [agencies-trainees] L27 數字 42 在 S3 找不到：- 收入：2013 年偶像平均年收入約 4,674 萬韓元（約 4.2 萬美元），2010 年為 2
+ERROR W5 [agencies-trainees] L27 數字 6740000 在 S3 找不到：- 收入：2013 年偶像平均年收入約 4,674 萬韓元（約 4.2 萬美元），2010 年為 2
+ERROR W5 [agencies-trainees] L27 數字 4.2 在 S3 找不到：- 收入：2013 年偶像平均年收入約 4,674 萬韓元（約 4.2 萬美元），2010 年為 2
+ERROR W5 [agencies-trainees] L27 數字 6970000 在 S3 找不到：- 收入：2013 年偶像平均年收入約 4,674 萬韓元（約 4.2 萬美元），2010 年為 2
+ERROR W2 [idol-terms-fandom] L22 引用 S5 但 frontmatter sources 沒列
+ERROR W1 [music-shows] L9 沒有來源標註：| 二 | The Show | SBS FunE |
+ERROR W1 [music-shows] L10 沒有來源標註：| 三 | Show Champion | MBC M |
+ERROR W1 [music-shows] L11 沒有來源標註：| 四 | M Countdown | Mnet |
+ERROR W1 [music-shows] L12 沒有來源標註：| 五 | Music Bank | KBS2 |
+ERROR W1 [music-shows] L13 沒有來源標註：| 六 | Show! 音樂中心 | MBC |
+ERROR W1 [music-shows] L14 沒有來源標註：| 日 | 人氣歌謠 Inkigayo | SBS |
+ERROR W2 [music-shows] L21 引用 S2 但 frontmatter sources 沒列
+ERROR P2 [s1] 數字 15 不在 ['index']
+ERROR P2 [s2] 數字 1992 不在 ['index']
+ERROR P2 [s4] 數字 1.01990 不在 ['kpop-overview']
+ERROR P2 [s4] 數字 101990 不在 ['kpop-overview']
+ERROR P2 [s4] 數字 2.02008 不在 ['kpop-overview']
+ERROR P2 [s4] 數字 202008 不在 ['kpop-overview']
+WARN  W6 [timeline] L27 可能來自摘要段但未標待查證：- 2012 年 7 月 15 日 PSY〈江南 Style〉發行 [S6]；1
+WARN  W6 [timeline] L27 可能來自摘要段但未標待查證：- 2012 年 7 月 15 日 PSY〈江南 Style〉發行 [S6]；1
+WARN  W6 [global-milestones] L5 可能來自摘要段但未標待查證：- PSY 的歌，2012 年 7 月 15 日由 YG 發行；歌名指首爾江南區
+WARN  W6 [global-milestones] L6 可能來自摘要段但未標待查證：- 2012 年 9 月 1 日超越〈Gee〉，成為 YouTube 觀看最多的
+WARN  W6 [global-milestones] L7 可能來自摘要段但未標待查證：- 2012 年 11 月 24 日成為 YouTube 史上觀看最多的影片 [
+WARN  W6 [global-milestones] L8 可能來自摘要段但未標待查證：- 2012 年 12 月 21 日成為第一支觀看破 10 億的 YouTube
+WARN  W6 [global-milestones] L10 可能來自摘要段但未標待查證：- 2012 年底在 30 多個國家登上榜首 [S6]。
+SUMMARY {"wiki": {"errors": 15, "warnings": 7}, "slides": {"slides": 16, "errors": 6, "warnings": 0}}

@@ -1,0 +1,13 @@
+ERROR W1 [open-questions] L13 沒有來源標註：| Q6 | K-pop_fandom 網址抓回的是 K-pop 主條目 | 拒
+ERROR W2 [idol-terms-fandom] L22 引用 S5 但 frontmatter sources 沒列
+ERROR W1 [music-shows] L9 沒有來源標註：| 二 | The Show | SBS FunE |
+ERROR W1 [music-shows] L10 沒有來源標註：| 三 | Show Champion | MBC M |
+ERROR W1 [music-shows] L11 沒有來源標註：| 四 | M Countdown | Mnet |
+ERROR W1 [music-shows] L12 沒有來源標註：| 五 | Music Bank | KBS2 |
+ERROR W1 [music-shows] L13 沒有來源標註：| 六 | Show! 音樂中心 | MBC |
+ERROR W1 [music-shows] L14 沒有來源標註：| 日 | 人氣歌謠 Inkigayo | SBS |
+ERROR W2 [music-shows] L21 引用 S2 但 frontmatter sources 沒列
+ERROR P2 [s1] 數字 15 不在 ['index']
+ERROR P2 [s2] 數字 1992 不在 ['index']
+ERROR P6 [s8] 頁尾標示 ['idol-terms-fandom'] 但 data-wiki 沒列
+SUMMARY {"wiki": {"errors": 9, "warnings": 0}, "slides": {"slides": 16, "errors": 3, "warnings": 0}}

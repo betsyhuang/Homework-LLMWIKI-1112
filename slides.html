@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}*,*::before,*::after{box-sizing:border-box}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>K-pop 產業入門課</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one slide per screen, stage-light magenta accent on a cool "concert hall" neutral; footer of every slide cites its wiki page */
+:root{
+  --bg:#f7f5fa; --surface:#ffffff; --ink:#1c1726; --muted:#6a6378; --line:#e3dfeb;
+  --accent:#c81d6a; --accent-soft:#fbe3ee; --teal:#0d7480; --teal-soft:#dff1f2;
+  --display:"Archivo Black","Noto Sans TC",system-ui,sans-serif;
+  --body:"Noto Sans TC",system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#131019; --surface:#1d1926; --ink:#f1edf7; --muted:#a59db4; --line:#302a3d;
+  --accent:#ff5c9e; --accent-soft:#3a1628; --teal:#4cc6d1; --teal-soft:#123237; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#131019; --surface:#1d1926; --ink:#f1edf7; --muted:#a59db4; --line:#302a3d;
+  --accent:#ff5c9e; --accent-soft:#3a1628; --teal:#4cc6d1; --teal-soft:#123237; color-scheme:dark}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;overflow:hidden}
+.deck{position:relative;height:100%;display:flex;flex-direction:column}
+.stage{flex:1;position:relative;overflow:hidden}
+section{position:absolute;inset:0;overflow-y:auto;display:flex;flex-direction:column;
+  padding-block:clamp(20px,4vh,48px) 16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section[hidden]{display:none!important}
+.inner{width:100%;max-width:1040px;margin:auto;display:flex;flex-direction:column;gap:20px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h1,h2{font-family:var(--display);font-weight:900;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.2rem,6vw,4.4rem)}
+h2{font-size:clamp(1.5rem,3.6vw,2.4rem)}
+h3{margin:0;font-size:1.05rem}
+p{margin:0;max-width:62ch}
+.lead{font-size:1.15rem;color:var(--muted)}
+ul{margin:0;padding-left:1.2em;display:grid;gap:8px}
+.src{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px;max-width:1040px;width:100%;margin-left:auto;margin-right:auto}
+.src b{color:var(--teal);font-weight:500}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.grid>*{min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.card .k{font-family:var(--display);font-size:1.6rem;color:var(--accent);line-height:1.1}
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;padding:2px 8px;border-radius:99px;background:var(--teal-soft);color:var(--teal)}
+.big{font-family:var(--display);font-size:clamp(3rem,10vw,6.5rem);line-height:1;color:var(--accent)}
+.note{background:var(--accent-soft);border-radius:10px;padding:12px 16px;max-width:none}
+/* timeline */
+.tl{list-style:none;padding:0;display:grid;gap:0;border-left:2px solid var(--line);margin-left:6px}
+.tl li{position:relative;padding:6px 0 12px 22px}
+.tl li::before{content:"";position:absolute;left:-7px;top:13px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.tl .y{font-family:var(--display);color:var(--accent);margin-right:8px}
+/* flow */
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch}
+.flow .card{flex:1 1 160px}
+.flow .step{font-family:var(--mono);font-size:12px;color:var(--teal)}
+/* table */
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted);font-weight:500}
+td:first-child{font-weight:700;white-space:nowrap}
+/* bar */
+.bars{display:grid;gap:10px}
+.bar{display:grid;grid-template-columns:7.5em 1fr 3em;gap:10px;align-items:center;font-variant-numeric:tabular-nums}
+.bar .t{display:block;height:22px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar .f{display:block;height:100%;background:var(--accent)}
+.bar:not(:first-child) .f{background:var(--teal)}
+/* quiz */
+.q{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:8px}
+.q button{justify-self:start}
+.ans{color:var(--teal);font-weight:700}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 14px}
+button:hover{border-color:var(--accent)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* nav */
+nav{display:flex;align-items:center;gap:10px;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));border-top:1px solid var(--line);background:var(--surface);padding-bottom:max(10px,env(safe-area-inset-bottom,0px))}
+nav .prog{flex:1;height:4px;background:var(--line);border-radius:2px;overflow:hidden}
+nav .prog i{display:block;height:100%;background:var(--accent);transition:width .25s}
+nav .count{font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:4.5em;text-align:right}
+.cover{justify-content:center}
+.cover .hangul{font-family:var(--display);font-size:clamp(1rem,2.4vw,1.4rem);color:var(--teal)}
+@media (prefers-reduced-motion:reduce){nav .prog i{transition:none}}
+@media (max-width:560px){.bar{grid-template-columns:6em 1fr 2.6em}td:first-child{white-space:normal}}
+</style>
+
+</head>
+<body>
+<div class="deck">
+<div class="stage" id="stage">
+
+<section id="s1" data-wiki="index" class="cover">
+ <div class="inner">
+  <span class="eyebrow">LLM Wiki 教學簡報 · 給輕度粉絲</span>
+  <h1>K-pop 是怎麼<br>被「做」出來的？</h1>
+  <p class="lead">從練習生、回歸、音樂節目一位，到 YouTube 十億觀看：看懂韓團產業的運作方式。</p>
+  <span class="hangul">케이팝 · 한류 · 아이돌</span>
+ </div>
+ <div class="src"><span>內容出處 <b>wiki/index.md</b></span><span>← → 鍵或下方按鈕換頁</span></div>
+</section>
+
+<section id="s2" data-wiki="index timeline">
+ <div class="inner">
+  <span class="eyebrow">學習目標</span>
+  <h2>看完這份簡報，你會知道⋯</h2>
+  <div class="grid">
+   <div class="card"><span class="tag">歷史</span><h3>K-pop 與韓流從哪裡來</h3><p>韓流 1.0 到 2.0，以及 1992 年的起點。</p></div>
+   <div class="card"><span class="tag">產業</span><h3>偶像是怎麼被培養的</h3><p>四大經紀公司與練習生制度，以及它的爭議。</p></div>
+   <div class="card"><span class="tag">術語</span><h3>回歸、一位、三冠王</h3><p>看懂粉絲在說什麼，知道一位怎麼算。</p></div>
+   <div class="card"><span class="tag">全球</span><h3>怎麼走向全世界</h3><p>江南 Style、BTS、BLACKPINK 的關鍵紀錄。</p></div>
+  </div>
+  <p class="note">每一頁底部都標出內容來自哪一頁 Wiki；Wiki 的每一句話再對應到原始來源 S1–S6。</p>
+ </div>
+ <div class="src"><span>內容出處 <b>wiki/index.md</b> + <b>wiki/timeline.md</b></span></div>
+</section>
+
+<section id="s3" data-wiki="kpop-overview">
+ <div class="inner">
+  <span class="eyebrow">第 1 部分 · 定義</span>
+  <h2>K-pop 是什麼？</h2>
+  <ul>
+   <li><b>Korean popular music</b> 的縮寫，指南韓流行音樂；今天多半專指強調視覺與表演的偶像女團、男團。</li>
+   <li>曲風是混血的：西方舞曲、嘻哈、R&amp;B、搖滾，加上韓式的表演風格。</li>
+   <li>核心角色是「偶像（idol）」：在經紀公司高度管理的明星系統下，受過舞蹈、歌唱、外語訓練。</li>
+  </ul>
+  <div class="grid">
+   <div class="card"><span class="k">1999</span><p>Billboard 第一次使用「K-pop」這個詞（10 月 9 日）。</p></div>
+   <div class="card"><span class="k">第 6 大</span><p>2019 年南韓在全球音樂市場的排名。</p></div>
+  </div>
+ </div>
+ <div class="src"><span>內容出處 <b>wiki/kpop-overview.md</b></span><span>原始來源 S1 S3</span></div>
+</section>
+
+<section id="s4" data-wiki="kpop-overview">
+ <div class="inner">
+  <span class="eyebrow">第 1 部分 · 韓流</span>
+  <h2>韓流（Hallyu 한류）：從韓劇到 K-pop</h2>
+  <div class="grid">
+   <div class="card"><span class="tag">韓流 1.0</span><h3>1990 年代末 – 2000 年代初</h3><p>韓劇在亞洲走紅。台灣在 2000 年由《火花》《秋天的童話》帶動。</p></div>
+   <div class="card"><span class="tag">韓流 2.0</span><h3>2008 年起</h3><p>社群媒體與 K-pop 成為主角；同年南韓文化出口首次超過進口。</p></div>
+  </div>
+  <ul>
+   <li>「韓流」一詞最早見於 1999 年 11 月 19 日的《北京青年報》。</li>
+   <li>南韓政府把 K-pop 當軟實力推動；1999 年通過《文化產業振興基本法》。</li>
+   <li>2012 年政府估計韓流經濟價值約 832 億美元。</li>
+  </ul>
+ </div>
+ <div class="src"><span>內容出處 <b>wiki/kpop-overview.md</b></span><span>原始來源 S1 S2</span></div>
+</section>
+
+<section id="s5" data-wiki="timeline">
+ <div class="inner">
+  <span class="eyebrow">第 2 部分 · 起點</span>
+  <h2>1992：徐太志與孩子們</h2>
+  <div class="grid">
+   <div class="card"><span class="k">最低分</span><p>1992 年 4 月 11 日在 MBC 選秀節目出道，評審給了最低分，〈Nan Arayo〉卻大紅。</p></div>
+   <div class="card"><span class="k">饒舌</span><p>把饒舌帶進韓國流行音樂，並用歌詞做社會批判；也帶動嘻哈時尚與街舞表演。</p></div>
+   <div class="card"><span class="k">YG</span><p>1996 年解散後，成員梁鉉錫創立了 YG 娛樂。</p></div>
+  </div>
+  <p class="note">粉絲抗議歌曲被禁，促成 1996 年 6 月韓國廢除音樂事前審查。粉絲從一開始就能影響產業。</p>
+ </div>
+ <div class="src"><span>內容出處 <b>wiki/timeline.md</b></span><span>原始來源 S5</span></div>
+</section>
+
+<section id="s6" data-wiki="timeline">
+ <div class="inner">
+  <span class="eyebrow">第 2 部分 · 大事記</span>
+  <h2>三十年，五個轉折點</h2>
+  <ol class="tl">
+   <li><span class="y">1995</span>李秀滿創立 SM；H.O.T.、S.E.S. 被稱為「第一代」。</li>
+   <li><span class="y">2008</span>韓流 2.0 開始，文化出口首次超過進口。</li>
+   <li><span class="y">2012</span>〈江南 Style〉成為第一支 YouTube 觀看破 10 億的影片。</li>
+   <li><span class="y">2015</span>少女時代成為第一個拿下 100 座音樂節目一位的團體。</li>
+   <li><span class="y">2023</span>BLACKPINK 成為第一個擔任 Coachella 壓軸的亞洲藝人。</li>
+  </ol>
+ </div>
+ <div class="src"><span>內容出處 <b>wiki/timeline.md</b></span><span>原始來源 S1 S2 S4 S6</span></div>
+</section>
+
+<section id="s7" data-wiki="agencies-trainees">
+ <div class="inner">
+  <span class="eyebrow">第 3 部分 · 產業</span>
+  <h2>四大經紀公司</h2>
+  <div class="grid">
+   <div class="card"><span class="k">SM</span><p>1995 年，李秀滿創立。第一個把「團體當品牌」經營的公司。</p></div>
+   <div class="card"><span class="k">YG</span><p>1996 年，梁鉉錫創立（前徐太志與孩子們成員）。</p></div>
+   <div class="card"><span class="k">JYP</span><p>1997 年，朴軫永創立。</p></div>
+   <div class="card"><span class="k">HYBE</span><p>與前三家並列主導產業的第四家公司。</p></div>
+  </div>
+  <p class="lead">這些公司在 1997 年亞洲金融危機後填補市場空缺而壯大。</p>
+ </div>
+ <div class="src"><span>內容出處 <b>wiki/agencies-trainees.md</b></span><span>原始來源 S1 S2 S3 S5</span></div>
+</section>
+
+<section id="s8" data-wiki="agencies-trainees idol-terms-fandom">
+ <div class="inner">
+  <span class="eyebrow">第 3 部分 · 練習生制度</span>
+  <h2>從素人到偶像的流程</h2>
+  <div class="flow">
+   <div class="card"><span class="step">STEP 1 · 選拔</span><h3>試鏡與星探</h3><p>公司試鏡、線上試鏡、街頭星探。SM 每年在 9 個國家收到約 30 萬份報名。</p></div>
+   <div class="card"><span class="step">STEP 2 · 簽約</span><h3>受合約約束</h3><p>練習生被要求維持健康形象、私生活低調。</p></div>
+   <div class="card"><span class="step">STEP 3 · 訓練</span><h3>沒有固定期限</h3><p>幾個月到幾年；上歌唱、舞蹈、外語課，並且住在一起。</p></div>
+   <div class="card"><span class="step">STEP 4 · 出道</span><h3>站上出道舞台</h3><p>第一次在音樂節目演出，正式成為偶像。</p></div>
+  </div>
+  <div class="card"><span class="k">300 萬美元</span><p>2012 年《華爾街日報》估計培養一名偶像的成本。這套模式源自李秀滿參考日本傑尼斯的制度。</p></div>
+ </div>
+ <div class="src"><span>內容出處 <b>wiki/agencies-trainees.md</b> + <b>wiki/idol-terms-fandom.md</b></span><span>原始來源 S1 S3 S4</span></div>
+</section>
+
+<section id="s9" data-wiki="agencies-trainees">
+ <div class="inner">
+  <span class="eyebrow">第 3 部分 · 另一面</span>
+  <h2>光鮮背後的爭議</h2>
+  <ul>
+   <li>訓練方式被批評為「機器人式」。</li>
+   <li>有練習生反映被要求整形、嚴格控制體重。</li>
+   <li>公司常禁止戀愛；長達十年的合約受到批評，2009 年東方神起就曾挑戰 SM 的合約條款。</li>
+   <li>2013 年偶像平均年收入約 4.2 萬美元（4,674 萬韓元）。</li>
+   <li>男性偶像須服兵役：18–35 歲男性，役期 18 個月。</li>
+  </ul>
+ </div>
+ <div class="src"><span>內容出處 <b>wiki/agencies-trainees.md</b></span><span>原始來源 S1 S3</span></div>
+</section>
+
+<section id="s10" data-wiki="idol-terms-fandom">
+ <div class="inner">
+  <span class="eyebrow">第 4 部分 · 術語</span>
+  <h2>粉絲在說什麼？術語小辭典</h2>
+  <div class="tw"><table>
+   <thead><tr><th>術語</th><th>意思</th></tr></thead>
+   <tbody>
+    <tr><td>出道 debut</td><td>第一次在音樂節目演出，通常也是第一次公開表演</td></tr>
+    <tr><td>回歸 comeback</td><td>每一次新歌宣傳期都叫回歸，就算沒有休息過</td></tr>
+    <tr><td>概念 concept</td><td>每次回歸的視覺／音樂主題</td></tr>
+    <tr><td>重點舞 point dance</td><td>一再重複、讓人記住的招牌動作</td></tr>
+    <tr><td>子團 sub-unit</td><td>由部分成員組成的小分隊，如 Super Junior-K.R.Y.</td></tr>
+    <tr><td>一位 win</td><td>在每週音樂節目拿下第一名</td></tr>
+    <tr><td>三冠王 triple crown</td><td>同一首歌拿 3 次一位後就不再列入競爭</td></tr>
+   </tbody>
+  </table></div>
+ </div>
+ <div class="src"><span>內容出處 <b>wiki/idol-terms-fandom.md</b></span><span>原始來源 S1 S4</span></div>
+</section>
+
+<section id="s11" data-wiki="music-shows">
+ <div class="inner">
+  <span class="eyebrow">第 4 部分 · 音樂節目</span>
+  <h2>一週六檔，天天打歌</h2>
+  <div class="tw"><table>
+   <thead><tr><th>星期</th><th>節目</th><th>頻道</th></tr></thead>
+   <tbody>
+    <tr><td>二</td><td>The Show</td><td>SBS FunE</td></tr>
+    <tr><td>三</td><td>Show Champion</td><td>MBC M</td></tr>
+    <tr><td>四</td><td>M Countdown</td><td>Mnet</td></tr>
+    <tr><td>五</td><td>Music Bank</td><td>KBS2</td></tr>
+    <tr><td>六</td><td>Show! 音樂中心</td><td>MBC</td></tr>
+    <tr><td>日</td><td>人氣歌謠 Inkigayo</td><td>SBS</td></tr>
+   </tbody>
+  </table></div>
+  <p class="lead">粉絲可以免費申請入場看錄影，但不能錄影拍照。</p>
+ </div>
+ <div class="src"><span>內容出處 <b>wiki/music-shows.md</b></span><span>原始來源 S4</span></div>
+</section>
+
+<section id="s12" data-wiki="music-shows">
+ <div class="inner">
+  <span class="eyebrow">第 4 部分 · 計分</span>
+  <h2>一位怎麼算？以 Music Bank 為例</h2>
+  <div class="bars" role="img" aria-label="Music Bank 計分：數位音源 65%、KBS 播放 20%、觀眾問卷 10%、實體專輯 5%">
+   <div class="bar"><span>數位音源</span><span class="t"><span class="f" style="width:65%"></span></span><span>65%</span></div>
+   <div class="bar"><span>KBS 播放</span><span class="t"><span class="f" style="width:20%"></span></span><span>20%</span></div>
+   <div class="bar"><span>觀眾問卷</span><span class="t"><span class="f" style="width:10%"></span></span><span>10%</span></div>
+   <div class="bar"><span>實體專輯</span><span class="t"><span class="f" style="width:5%"></span></span><span>5%</span></div>
+  </div>
+  <p class="note">數位音源占最大比例，這就是粉絲要「刷串流」的原因。新歌第一週不能拿一位；拿滿 3 次（部分節目 5 次）就退出競爭。</p>
+  <p>紀錄：〈江南 Style〉2012 年連續 10 週 Music Bank 一位；BTS〈Dynamite〉2020 年拿下 32 座一位。</p>
+ </div>
+ <div class="src"><span>內容出處 <b>wiki/music-shows.md</b></span><span>原始來源 S4 S2</span></div>
+</section>
+
+<section id="s13" data-wiki="global-milestones">
+ <div class="inner">
+  <span class="eyebrow">第 5 部分 · 走向全球</span>
+  <h2>2012：江南 Style 打開世界</h2>
+  <div class="big">10 億</div>
+  <p class="lead">2012 年 12 月 21 日，第一支 YouTube 觀看破 10 億的影片。</p>
+  <div class="grid">
+   <div class="card"><span class="k">No.2</span><p>Billboard Hot 100 最高名次，當時南韓歌手最高紀錄。</p></div>
+   <div class="card"><span class="k">30+ 國</span><p>2012 年底登上 30 多個國家的榜首。</p></div>
+   <div class="card"><span class="k">騎馬舞</span><p>歌名指首爾江南區的奢華生活，招牌動作是騎馬舞。</p></div>
+  </div>
+ </div>
+ <div class="src"><span>內容出處 <b>wiki/global-milestones.md</b></span><span>原始來源 S2 S6</span></div>
+</section>
+
+<section id="s14" data-wiki="global-milestones">
+ <div class="inner">
+  <span class="eyebrow">第 5 部分 · 現在</span>
+  <h2>BTS 與 BLACKPINK</h2>
+  <div class="grid">
+   <div class="card"><span class="tag">BTS</span><p>12 座告示牌音樂獎、11 座全美音樂獎、5 次葛萊美提名；6 張 Billboard 200 冠軍專輯。</p></div>
+   <div class="card"><span class="tag">BLACKPINK</span><p>Born Pink 世界巡演（2022–23）是亞洲藝人票房最高的巡演；2023 年擔任 Coachella 壓軸。</p></div>
+  </div>
+  <p>2018 年後，偶像團體共拿下 19 張 Billboard 200 冠軍專輯。YouTube 是 Wonder Girls、BIGBANG、2NE1 到 BTS、BLACKPINK 共同的出海口。</p>
+ </div>
+ <div class="src"><span>內容出處 <b>wiki/global-milestones.md</b></span><span>原始來源 S2 S3</span></div>
+</section>
+
+<section id="s15" data-wiki="timeline agencies-trainees music-shows global-milestones">
+ <div class="inner">
+  <span class="eyebrow">小測驗</span>
+  <h2>考考你</h2>
+  <div class="q"><b>Q1. YG 娛樂的創辦人原本是哪個團體的成員？</b><button type="button" id="qa1">看答案</button><span class="ans" hidden>徐太志與孩子們（梁鉉錫）</span></div>
+  <div class="q"><b>Q2. Music Bank 計分中，占比最高的是哪一項？</b><button type="button" id="qa2">看答案</button><span class="ans" hidden>數位音源，占 65%</span></div>
+  <div class="q"><b>Q3. 第一支 YouTube 觀看破 10 億的影片是？</b><button type="button" id="qa3">看答案</button><span class="ans" hidden>PSY〈江南 Style〉，2012 年</span></div>
+  <div class="q"><b>Q4. 「回歸」一定代表藝人休息很久後復出嗎？</b><button type="button" id="qa4">看答案</button><span class="ans" hidden>不是。每一次新歌宣傳期都叫回歸。</span></div>
+ </div>
+ <div class="src"><span>內容出處 <b>wiki/timeline.md · agencies-trainees.md · music-shows.md · global-milestones.md</b></span></div>
+</section>
+
+<section id="s16" data-wiki="index">
+ <div class="inner">
+  <span class="eyebrow">重點回顧</span>
+  <h2>三句話記住 K-pop 產業</h2>
+  <ul>
+   <li><b>公司培養：</b>四大經紀公司用練習生制度訓練偶像，成本高、爭議也多。</li>
+   <li><b>粉絲推動：</b>串流與投票直接決定音樂節目一位。</li>
+   <li><b>YouTube 出海：</b>韓流 2.0 靠社群媒體把 K-pop 推向全世界。</li>
+  </ul>
+  <div class="card">
+   <h3>來源（Wiki 的原始資料）</h3>
+   <p style="font-size:.9rem;color:var(--muted)">S1 K-pop · S2 Korean wave · S3 Korean idol · S4 Music programs of South Korea · S5 Seo Taiji and Boys · S6 Gangnam Style（English Wikipedia，2026-11-12 擷取）</p>
+  </div>
+ </div>
+ <div class="src"><span>內容出處 <b>wiki/index.md</b></span></div>
+</section>
+
+</div>
+<nav aria-label="換頁">
+ <button type="button" id="prev" aria-label="上一頁">←</button>
+ <div class="prog"><i id="bar"></i></div>
+ <span class="count" id="count"></span>
+ <button type="button" id="next" aria-label="下一頁">→</button>
+</nav>
+</div>
+
+<script>
+(function(){
+  var S=[].slice.call(document.querySelectorAll('section')),i=0;
+  function show(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach(function(s,k){s.hidden=k!==i});
+    document.getElementById('bar').style.width=((i+1)/S.length*100)+'%';
+    document.getElementById('count').textContent=(i+1)+' / '+S.length;
+    if(location.hash!=='#'+S[i].id){try{history.replaceState(null,'','#'+S[i].id)}catch(e){location.hash=S[i].id}}}
+  function fromHash(){var h=location.hash.slice(1);var k=S.findIndex(function(s){return s.id===h});return k<0?0:k}
+  document.getElementById('prev').onclick=function(){show(i-1)};
+  document.getElementById('next').onclick=function(){show(i+1)};
+  document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();show(i+1)}if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(i-1)}});
+  var x0=null;document.getElementById('stage').addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+  document.getElementById('stage').addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>60)show(i+(d<0?1:-1));x0=null});
+  document.querySelectorAll('.q button').forEach(function(b){b.onclick=function(){var a=b.nextElementSibling;a.hidden=!a.hidden;b.textContent=a.hidden?'看答案':'收起'}});
+  window.addEventListener('hashchange',function(){show(fromHash())});
+  show(fromHash());
+})();
+</script>
+
+</body>
+</html>

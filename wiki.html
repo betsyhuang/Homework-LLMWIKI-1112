@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}*,*::before,*::after{box-sizing:border-box}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>K-pop 入門 LLM Wiki</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: wiki reader — left index rail, one article at a time, source chips link back to raw */
+:root{
+  --bg:#f7f5fa; --surface:#ffffff; --ink:#1c1726; --muted:#6a6378; --line:#e3dfeb;
+  --accent:#c81d6a; --accent-soft:#fbe3ee; --teal:#0d7480; --teal-soft:#dff1f2; --warn:#9a5b00; --warn-soft:#fdf0d9;
+  --display:"Archivo Black","Noto Sans TC",system-ui,sans-serif;
+  --body:"Noto Sans TC",system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#131019; --surface:#1d1926; --ink:#f1edf7; --muted:#a59db4; --line:#302a3d;
+  --accent:#ff5c9e; --accent-soft:#3a1628; --teal:#4cc6d1; --teal-soft:#123237; --warn:#f0b75c; --warn-soft:#3a2a10; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#131019; --surface:#1d1926; --ink:#f1edf7; --muted:#a59db4; --line:#302a3d;
+  --accent:#ff5c9e; --accent-soft:#3a1628; --teal:#4cc6d1; --teal-soft:#123237; --warn:#f0b75c; --warn-soft:#3a2a10; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.7}
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px;padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{grid-column:1/-1;display:flex;flex-direction:column;gap:6px;border-bottom:1px solid var(--line);padding-bottom:18px}
+header .eb{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+header h1{font-family:var(--display);font-size:clamp(1.8rem,4vw,2.6rem);margin:0;line-height:1.15}
+header p{margin:0;color:var(--muted);max-width:70ch}
+nav{display:flex;flex-direction:column;gap:18px;position:sticky;top:16px;align-self:start}
+.ng{display:flex;flex-direction:column;gap:2px}
+.nl{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+nav a{color:var(--ink);text-decoration:none;padding:4px 10px;border-radius:6px;font-size:14px}
+nav a:hover{background:var(--surface)}
+nav a[aria-current="page"]{background:var(--accent-soft);color:var(--accent);font-weight:700}
+main{min-width:0}
+article{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px clamp(16px,3vw,36px)}
+article h1{font-family:var(--display);font-size:1.8rem;margin:.2em 0 .4em;line-height:1.2;text-wrap:balance}
+article h2{font-size:1.2rem;margin:1.6em 0 .5em;padding-top:.4em;border-top:1px solid var(--line)}
+article p,article li{max-width:68ch}
+article ul{padding-left:1.2em}
+.path{font-family:var(--mono);font-size:12px;color:var(--teal)}
+.fm{font-family:var(--mono);font-size:12px;background:var(--bg);border-radius:8px;padding:10px 12px;color:var(--muted);white-space:pre-wrap;overflow-x:auto;margin:8px 0 0}
+table{border-collapse:collapse;width:100%;font-size:14px;display:block;overflow-x:auto}
+th,td{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+a{color:var(--accent)}
+a.cite{display:inline-block;font-family:var(--mono);font-size:11px;padding:0 6px;border-radius:99px;background:var(--teal-soft);color:var(--teal);text-decoration:none;vertical-align:1px}
+a.wl{font-weight:700}
+.pend{font-size:11px;padding:1px 6px;border-radius:99px;background:var(--warn-soft);color:var(--warn);font-weight:700}
+blockquote{margin:1em 0;padding:8px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0}
+code{font-family:var(--mono);font-size:.9em}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:760px){.wrap{grid-template-columns:1fr}nav{position:static;flex-direction:row;flex-wrap:wrap;gap:12px}.ng{flex:1 1 100%}.ng{flex-direction:row;flex-wrap:wrap}.nl{flex-basis:100%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <header>
+  <span class="eb">LLM Wiki · 6 篇來源 · 7 個頁面</span>
+  <h1>K-pop 入門 LLM Wiki</h1>
+  <p>依 Karpathy LLM Wiki 模式建立：raw/ 原始來源 → discussions/ 先討論 → wiki/ 由 LLM 維護的頁面。每條事實後面的 <a class="cite" href="#S1">S1</a> 標籤可點回原始來源。</p>
+ </header>
+ <nav aria-label="Wiki 目錄"><div class="ng"><span class="nl">Wiki 頁面</span><a href="#index" data-k="index">索引</a><a href="#kpop-overview" data-k="kpop-overview">K-pop 與韓流總覽</a><a href="#timeline" data-k="timeline">K-pop 發展大事記</a><a href="#agencies-trainees" data-k="agencies-trainees">四大經紀公司與練習生制度</a><a href="#idol-terms-fandom" data-k="idol-terms-fandom">偶像術語與粉絲文化</a><a href="#music-shows" data-k="music-shows">音樂節目與一位計分</a><a href="#global-milestones" data-k="global-milestones">走向全球</a><a href="#open-questions" data-k="open-questions">待查證與來源衝突</a><a href="#log" data-k="log">Log（append-only）</a></div><div class="ng"><span class="nl">原始來源 raw/</span><a href="#S1" data-k="S1">K-pop (Wikipedia)</a><a href="#S2" data-k="S2">Korean wave / Hallyu (Wikipedia)</a><a href="#S3" data-k="S3">Korean idol (Wikipedia)</a><a href="#S4" data-k="S4">Music programs of South Korea (Wikipedia)</a><a href="#S5" data-k="S5">Seo Taiji and Boys (Wikipedia)</a><a href="#S6" data-k="S6">Gangnam Style (Wikipedia)</a><a href="#rejected" data-k="rejected">_rejected-S4b-kpop-fandom</a></div><div class="ng"><span class="nl">討論與規則</span><a href="#D1-scope" data-k="D1-scope">D1 — 主題與範圍討論（2026-11-12）</a><a href="#D2-ingest-notes" data-k="D2-ingest-notes">D2 — 逐篇 ingest 前討論筆記</a><a href="#schema" data-k="schema">Schema（CLAUDE.md）</a></div></nav>
+ <main><article id="index" data-kind="wiki" hidden><div class="path">wiki/index.md</div><pre class="fm">title: 索引
+updated: 2026-11-12</pre><h1>K-pop 入門 LLM Wiki — 索引</h1>
+<blockquote>
+<p>主題：K-pop 韓團入門（給輕度粉絲：產業怎麼運作）　來源：6 篇（S1–S6），拒收 1 篇</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>頁面</th>
+<th>摘要</th>
+<th>來源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="wl" href="#kpop-overview">kpop-overview</a></td>
+<td>K-pop 定義、韓流 1.0/2.0、政府軟實力</td>
+<td>S1 S2 S3</td>
+</tr>
+<tr>
+<td><a class="wl" href="#timeline">timeline</a></td>
+<td>1925 → 2023 大事記，含徐太志與孩子們</td>
+<td>S1–S6</td>
+</tr>
+<tr>
+<td><a class="wl" href="#agencies-trainees">agencies-trainees</a></td>
+<td>四大公司、練習生制度、爭議</td>
+<td>S1 S2 S3 S5</td>
+</tr>
+<tr>
+<td><a class="wl" href="#idol-terms-fandom">idol-terms-fandom</a></td>
+<td>出道、回歸、一位等術語；粉絲文化</td>
+<td>S1 S2 S3 S4</td>
+</tr>
+<tr>
+<td><a class="wl" href="#music-shows">music-shows</a></td>
+<td>一週六檔音樂節目、一位計分方式</td>
+<td>S4 S6</td>
+</tr>
+<tr>
+<td><a class="wl" href="#global-milestones">global-milestones</a></td>
+<td>江南 Style、BTS、BLACKPINK</td>
+<td>S1 S2 S3 S6</td>
+</tr>
+<tr>
+<td><a class="wl" href="#open-questions">open-questions</a></td>
+<td>來源衝突與待查證清單</td>
+<td>S1–S6</td>
+</tr>
+</tbody>
+</table>
+<h2>來源</h2>
+<ul>
+<li>S1 K-pop — https://en.wikipedia.org/wiki/K-pop</li>
+<li>S2 Korean wave — https://en.wikipedia.org/wiki/Korean_wave</li>
+<li>S3 Korean idol — https://en.wikipedia.org/wiki/Korean_idol</li>
+<li>S4 Music programs of South Korea — https://en.wikipedia.org/wiki/Music_programs_of_South_Korea</li>
+<li>S5 Seo Taiji and Boys — https://en.wikipedia.org/wiki/Seo_Taiji_and_Boys</li>
+<li>S6 Gangnam Style — https://en.wikipedia.org/wiki/Gangnam_Style</li>
+</ul></article>
+<article id="kpop-overview" data-kind="wiki" hidden><div class="path">wiki/kpop-overview.md</div><pre class="fm">title: K-pop 與韓流總覽
+sources: [S1, S2, S3]
+updated: 2026-11-12</pre><h1>K-pop 與韓流總覽</h1>
+<h2>K-pop 是什麼</h2>
+<ul>
+<li>K-pop 是「Korean popular music」的縮寫，指南韓流行音樂；今天多半專指強調視覺與表演的偶像女團、男團 <a class="cite" href="#S1">S1</a>。</li>
+<li>韓國國內對流行歌的傳統說法是「gayo（歌謠）」<a class="cite" href="#S1">S1</a>。</li>
+<li>「K-pop」一詞最早可考的使用，是 1999 年 10 月 9 日的 Billboard <a class="cite" href="#S1">S1</a>。</li>
+<li>曲風是混血的：西方舞曲、嘻哈、R&amp;B、搖滾，加上韓式的表演風格 <a class="cite" href="#S1">S1</a>。</li>
+<li>核心人物是「偶像（idol）」：在經紀公司「高度管理的明星系統」下工作，受過舞蹈、歌唱、外語訓練 <a class="cite" href="#S3">S3</a>。詳見 <a class="wl" href="#agencies-trainees">agencies-trainees</a>。</li>
+</ul>
+<h2>韓流（Hallyu 한류）</h2>
+<ul>
+<li>韓流指 1990 年代以來，全球對南韓流行文化（K-pop、韓劇、K-beauty、韓食、電影）的興趣 <a class="cite" href="#S2">S2</a>。</li>
+<li>「韓流」一詞由「韓」＋「流（潮流）」組成，中文「韓流」最早見於 1999 年 11 月 19 日的《北京青年報》<a class="cite" href="#S2">S2</a>。</li>
+<li>韓流 1.0：1990 年代末到 2000 年代初，以韓劇在亞洲走紅為主；台灣在 2000 年由《火花》《秋天的童話》帶動 <a class="cite" href="#S2">S2</a>。</li>
+<li>韓流 2.0：2008 年起，由社群媒體與 K-pop 驅動 <a class="cite" href="#S2">S2</a>。</li>
+<li>2008 年，南韓文化產品出口首次超過進口 <a class="cite" href="#S2">S2</a>。</li>
+<li>南韓政府把 K-pop 當作軟實力推動 <a class="cite" href="#S1">S1</a>；1999 年通過《文化產業振興基本法》<a class="cite" href="#S2">S2</a>。</li>
+<li>2012 年政府估計韓流的經濟價值約 832 億美元 <a class="cite" href="#S2">S2</a>。</li>
+<li>2021 年「hallyu」和「Korean Wave」被收入《牛津英語詞典》<a class="cite" href="#S2">S2</a>。</li>
+</ul>
+<h2>市場規模</h2>
+<ul>
+<li>2019 年南韓是全球第 6 大音樂市場 <a class="cite" href="#S1">S1</a>。</li>
+</ul>
+<p>相關頁：<a class="wl" href="#timeline">timeline</a>、<a class="wl" href="#global-milestones">global-milestones</a>、<a class="wl" href="#idol-terms-fandom">idol-terms-fandom</a></p></article>
+<article id="timeline" data-kind="wiki" hidden><div class="path">wiki/timeline.md</div><pre class="fm">title: K-pop 發展大事記
+sources: [S1, S2, S3, S4, S5, S6]
+updated: 2026-11-12</pre><h1>K-pop 發展大事記</h1>
+<h2>前史</h2>
+<ul>
+<li>1925：已知第一張韓國流行音樂專輯 <a class="cite" href="#S1">S1</a>。</li>
+<li>1959：金氏姐妹（Kim Sisters）成為第一個在美國流行市場發片的韓國團體 <a class="cite" href="#S1">S1</a>。</li>
+</ul>
+<h2>起點：徐太志與孩子們（1992–1996）</h2>
+<ul>
+<li>三人團：徐太志（隊長、主要創作）、梁鉉錫（饒舌、編舞）、李朱諾（編舞）<a class="cite" href="#S5">S5</a>。</li>
+<li>1992 年 4 月 11 日在 MBC 選秀節目以〈Nan Arayo（我知道）〉出道，評審給了最低分，歌卻大紅 <a class="cite" href="#S5">S5</a>。</li>
+<li>被認為把饒舌帶進韓國流行音樂，並用歌詞做社會批判 <a class="cite" href="#S5">S5</a>。</li>
+<li>第二張專輯是韓國史上第一張「雙百萬」銷量專輯 <a class="cite" href="#S5">S5</a>。</li>
+<li>1995 年〈時代遺憾〉被倫理委員會禁播，引發粉絲抗議；1996 年 6 月韓國廢除音樂事前審查 <a class="cite" href="#S5">S5</a>。</li>
+<li>1996 年 1 月解散；同年梁鉉錫創立 YG 娛樂 <a class="cite" href="#S5">S5</a>。</li>
+<li>影響：嘻哈時尚、街舞成為表演元素，也帶動經紀公司組成 H.O.T.、水晶男孩（Sechs Kies）、神話等團體 <a class="cite" href="#S5">S5</a>。</li>
+</ul>
+<h2>第一代與經紀公司體系（1995–2000s）</h2>
+<ul>
+<li>1995 年李秀滿創立 SM 娛樂；H.O.T. 與 S.E.S. 被稱為「第一代」<a class="cite" href="#S1">S1</a>。</li>
+<li>1996 年 YG、1997 年 JYP 成立 <a class="cite" href="#S1">S1</a><a class="cite" href="#S2">S2</a>。</li>
+<li>1990 年代李秀滿引進日本傑尼斯（Johnny Kitagawa）的練習生模式 <a class="cite" href="#S3">S3</a>。</li>
+<li>1999 年 Billboard 首次使用「K-pop」一詞 <a class="cite" href="#S1">S1</a>。</li>
+<li>2000 年代 BoA、東方神起在日本成功 <a class="cite" href="#S1">S1</a>；BoA 2002–03 年進軍日本 <a class="cite" href="#S2">S2</a>。</li>
+</ul>
+<h2>社群與全球化（2008–）</h2>
+<ul>
+<li>2008 年韓流 2.0 開始；文化出口首次超過進口 <a class="cite" href="#S2">S2</a>。</li>
+<li>2009 年少女時代〈Gee〉連續 9 週拿下 Music Bank 一位 <a class="cite" href="#S4">S4</a>。</li>
+<li>2012 年 7 月 15 日 PSY〈江南 Style〉發行 <a class="cite" href="#S6">S6</a>；12 月 21 日成為第一支 YouTube 觀看破 10 億的影片 <a class="cite" href="#S6">S6</a><a class="cite" href="#S2">S2</a>。</li>
+<li>2015 年少女時代成為第一個拿下 100 座音樂節目一位的團體 <a class="cite" href="#S4">S4</a>。</li>
+<li>2018 年約 190 名南韓表演者（含 Red Velvet）赴平壤演出 <a class="cite" href="#S1">S1</a>。</li>
+<li>2020 年 BTS〈Dynamite〉拿下 32 個音樂節目一位 <a class="cite" href="#S4">S4</a>。</li>
+<li>2021 年「hallyu」收入牛津英語詞典 <a class="cite" href="#S2">S2</a>。</li>
+<li>2023 年 BLACKPINK 成為第一個擔任 Coachella 壓軸的亞洲藝人 <a class="cite" href="#S2">S2</a>。</li>
+</ul>
+<p>相關頁：<a class="wl" href="#kpop-overview">kpop-overview</a>、<a class="wl" href="#global-milestones">global-milestones</a>、<a class="wl" href="#agencies-trainees">agencies-trainees</a></p></article>
+<article id="agencies-trainees" data-kind="wiki" hidden><div class="path">wiki/agencies-trainees.md</div><pre class="fm">title: 四大經紀公司與練習生制度
+sources: [S1, S2, S3, S5]
+updated: 2026-11-12</pre><h1>四大經紀公司與練習生制度</h1>
+<h2>四大公司</h2>
+<ul>
+<li>產業由四家公司主導：SM、YG、JYP、HYBE <a class="cite" href="#S1">S1</a>。</li>
+<li>SM：1995 年由李秀滿創立 <a class="cite" href="#S1">S1</a><a class="cite" href="#S2">S2</a>；被認為是第一個把「團體當品牌」經營的公司 <a class="cite" href="#S3">S3</a>。</li>
+<li>YG：1996 年由梁鉉錫創立 <a class="cite" href="#S1">S1</a><a class="cite" href="#S2">S2</a>；他是徐太志與孩子們的前成員 <a class="cite" href="#S5">S5</a>。</li>
+<li>JYP：1997 年由朴軫永創立 <a class="cite" href="#S1">S1</a><a class="cite" href="#S2">S2</a>。</li>
+<li>這些公司在 1997 年亞洲金融危機後填補市場空缺而壯大 <a class="cite" href="#S2">S2</a>。</li>
+<li>2024 年營收（百萬美元）：SM 708、YG 250、JYP 450、HYBE 1,653<span class="pend">待查證</span><a class="cite" href="#S1">S1</a>。</li>
+</ul>
+<h2>練習生制度怎麼運作</h2>
+<ul>
+<li>招募管道：公司試鏡、線上試鏡、街頭星探，簽約後受合約約束 <a class="cite" href="#S1">S1</a>。</li>
+<li>SM 每年在 9 個國家收到約 30 萬份報名 <a class="cite" href="#S3">S3</a>。</li>
+<li>訓練期「沒有固定長度」，從幾個月到幾年；上歌唱、舞蹈、外語課，並且住在一起 <a class="cite" href="#S3">S3</a>。</li>
+<li>SM 把全球試鏡與製作方法稱為「文化技術（cultural technology）」<a class="cite" href="#S3">S3</a>。</li>
+<li>2012 年《華爾街日報》估計培養一名偶像約需 300 萬美元 <a class="cite" href="#S1">S1</a><a class="cite" href="#S3">S3</a>。</li>
+<li>練習生被要求維持「健康形象」，私生活要低調 <a class="cite" href="#S3">S3</a>。</li>
+<li>這套模式源自李秀滿參考日本傑尼斯的制度 <a class="cite" href="#S3">S3</a>。</li>
+</ul>
+<h2>爭議與批評</h2>
+<ul>
+<li>訓練方式被批評為「機器人式」<a class="cite" href="#S1">S1</a>。</li>
+<li>有練習生反映被要求整形、嚴格控制體重 <a class="cite" href="#S3">S3</a>。</li>
+<li>公司常禁止戀愛；長達十年的合約受到批評 <a class="cite" href="#S3">S3</a>。</li>
+<li>2009 年東方神起挑戰 SM 的合約條款 <a class="cite" href="#S3">S3</a>。</li>
+<li>2014 年起有法律保護未滿 19 歲的表演者<span class="pend">待查證</span><a class="cite" href="#S1">S1</a>。</li>
+<li>收入：2013 年偶像平均年收入約 4,674 萬韓元（約 4.2 萬美元），2010 年為 2,697 萬韓元 <a class="cite" href="#S3">S3</a>。</li>
+<li>男性偶像須服兵役：18–35 歲男性，役期 18 個月 <a class="cite" href="#S3">S3</a>。</li>
+</ul>
+<p>相關頁：<a class="wl" href="#idol-terms-fandom">idol-terms-fandom</a>、<a class="wl" href="#timeline">timeline</a></p></article>
+<article id="idol-terms-fandom" data-kind="wiki" hidden><div class="path">wiki/idol-terms-fandom.md</div><pre class="fm">title: 偶像術語與粉絲文化
+sources: [S1, S2, S3, S4, S5]
+updated: 2026-11-12</pre><h1>偶像術語與粉絲文化</h1>
+<h2>術語小辭典</h2>
+<table>
+<thead>
+<tr>
+<th>術語</th>
+<th>意思</th>
+<th>來源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>出道（debut）／出道舞台</td>
+<td>第一次在音樂節目演出，通常也是藝人第一次公開表演</td>
+<td><a class="cite" href="#S4">S4</a></td>
+</tr>
+<tr>
+<td>回歸（comeback）</td>
+<td>每一次新歌宣傳期都叫回歸，就算沒有休息過</td>
+<td><a class="cite" href="#S1">S1</a></td>
+</tr>
+<tr>
+<td>回歸舞台</td>
+<td>新歌第一次在音樂節目演出，代表新一輪宣傳開始</td>
+<td><a class="cite" href="#S4">S4</a></td>
+</tr>
+<tr>
+<td>概念（concept）</td>
+<td>每次回歸的視覺／音樂主題</td>
+<td><a class="cite" href="#S1">S1</a></td>
+</tr>
+<tr>
+<td>重點舞（point dance）</td>
+<td>一再重複、讓人記住的招牌動作</td>
+<td><a class="cite" href="#S1">S1</a></td>
+</tr>
+<tr>
+<td>子團（sub-unit）</td>
+<td>由部分成員組成的小分隊，如 Super Junior-K.R.Y.</td>
+<td><a class="cite" href="#S1">S1</a></td>
+</tr>
+<tr>
+<td>一位（win）</td>
+<td>在每週音樂節目拿下第一名</td>
+<td><a class="cite" href="#S4">S4</a></td>
+</tr>
+<tr>
+<td>三冠王（triple crown）</td>
+<td>同一首歌拿 3 次一位後就不再列入競爭</td>
+<td><a class="cite" href="#S4">S4</a></td>
+</tr>
+<tr>
+<td>忙內（maknae）</td>
+<td>團裡年紀最小的成員<span class="pend">待查證</span></td>
+<td><a class="cite" href="#S1">S1</a></td>
+</tr>
+</tbody>
+</table>
+<h2>粉絲文化</h2>
+<ul>
+<li>粉絲常做的事：翻跳舞蹈（dance cover）、反應影片、即時串流與投票 <a class="cite" href="#S2">S2</a>。</li>
+<li>其他活動：粉絲見面會、粉絲站、粉絲咖啡（fan café）、KCON <a class="cite" href="#S3">S3</a>。</li>
+<li>學者用「parasocial kin（擬親屬關係）」形容粉絲把偶像當家人一樣的連結 <a class="cite" href="#S3">S3</a>。</li>
+<li>粉絲可免費申請入場觀看音樂節目錄影，但不能錄影拍照 <a class="cite" href="#S4">S4</a>。</li>
+<li>粉絲行動會影響產業：1995 年徐太志歌曲被禁後的粉絲抗議，促成 1996 年廢除事前審查 <a class="cite" href="#S5">S5</a>。</li>
+<li>粉絲的串流與投票直接進入音樂節目計分，見 <a class="wl" href="#music-shows">music-shows</a> <a class="cite" href="#S4">S4</a>。</li>
+<li>BTS 的粉絲名為 ARMY<span class="pend">待查證</span><a class="cite" href="#S2">S2</a>。</li>
+</ul>
+<blockquote>
+<p>註：應援棒、應援口號在本次 6 篇來源中都沒有出現，依規則不寫入（見 <a class="wl" href="#open-questions">open-questions</a>）。</p>
+</blockquote>
+<p>相關頁：<a class="wl" href="#music-shows">music-shows</a>、<a class="wl" href="#agencies-trainees">agencies-trainees</a></p></article>
+<article id="music-shows" data-kind="wiki" hidden><div class="path">wiki/music-shows.md</div><pre class="fm">title: 音樂節目與一位計分
+sources: [S2, S4, S6]
+updated: 2026-11-12</pre><h1>音樂節目與一位計分</h1>
+<h2>一週六檔</h2>
+<ul>
+<li>音樂節目是每週播出、讓藝人表演宣傳新歌的電視節目，各有自己的排行或投票制度 <a class="cite" href="#S4">S4</a>。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>星期</th>
+<th>節目</th>
+<th>頻道</th>
+<th>來源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>二</td>
+<td>The Show</td>
+<td>SBS FunE</td>
+<td><a class="cite" href="#S4">S4</a></td>
+</tr>
+<tr>
+<td>三</td>
+<td>Show Champion</td>
+<td>MBC M</td>
+<td><a class="cite" href="#S4">S4</a></td>
+</tr>
+<tr>
+<td>四</td>
+<td>M Countdown</td>
+<td>Mnet</td>
+<td><a class="cite" href="#S4">S4</a></td>
+</tr>
+<tr>
+<td>五</td>
+<td>Music Bank</td>
+<td>KBS2</td>
+<td><a class="cite" href="#S4">S4</a></td>
+</tr>
+<tr>
+<td>六</td>
+<td>Show! 音樂中心</td>
+<td>MBC</td>
+<td><a class="cite" href="#S4">S4</a></td>
+</tr>
+<tr>
+<td>日</td>
+<td>人氣歌謠 Inkigayo</td>
+<td>SBS</td>
+<td><a class="cite" href="#S4">S4</a></td>
+</tr>
+</tbody>
+</table>
+<h2>一位怎麼算？以 Music Bank 為例</h2>
+<ul>
+<li>數位音源 65%、實體專輯 5%、KBS 播放次數 20%、觀眾問卷 10%，合計 100% <a class="cite" href="#S4">S4</a>。</li>
+<li>Show Champion：數位 35、專輯 15、事前投票 20、播放 20、社群 10，合計 100 <a class="cite" href="#S4">S4</a>。</li>
+<li>結論：串流（數位音源）是拿一位最關鍵的分數，這就是粉絲要「刷串流」的原因 <a class="cite" href="#S4">S4</a><a class="cite" href="#S2">S2</a>。</li>
+<li>部分節目把 YouTube 觀看數算進分數 <a class="cite" href="#S4">S4</a>。</li>
+<li>規則：新歌發行第一週不能拿一位；拿過 3 次（部分節目 5 次）一位的歌會退出競爭 <a class="cite" href="#S4">S4</a>。</li>
+</ul>
+<h2>紀錄</h2>
+<ul>
+<li>2009 年〈Gee〉連續 9 週 Music Bank 一位 <a class="cite" href="#S4">S4</a>。</li>
+<li>2012 年〈江南 Style〉連續 10 週 Music Bank 一位，打破紀錄 <a class="cite" href="#S4">S4</a>。</li>
+<li>2015 年少女時代累積 100 座一位，史上第一 <a class="cite" href="#S4">S4</a>。</li>
+<li>2020 年 BTS〈Dynamite〉拿下 32 座一位 <a class="cite" href="#S4">S4</a>。</li>
+</ul>
+<p>相關頁：<a class="wl" href="#idol-terms-fandom">idol-terms-fandom</a>、<a class="wl" href="#global-milestones">global-milestones</a></p></article>
+<article id="global-milestones" data-kind="wiki" hidden><div class="path">wiki/global-milestones.md</div><pre class="fm">title: 走向全球
+sources: [S1, S2, S3, S6]
+updated: 2026-11-12</pre><h1>走向全球</h1>
+<h2>江南 Style（2012）</h2>
+<ul>
+<li>PSY 的歌，2012 年 7 月 15 日由 YG 發行；歌名指首爾江南區的奢華生活風格，招牌動作是「騎馬舞」<a class="cite" href="#S6">S6</a>。</li>
+<li>2012 年 9 月 1 日超越〈Gee〉，成為 YouTube 觀看最多的 K-pop 影片 <a class="cite" href="#S6">S6</a>。</li>
+<li>2012 年 11 月 24 日成為 YouTube 史上觀看最多的影片 <a class="cite" href="#S6">S6</a>。</li>
+<li>2012 年 12 月 21 日成為第一支觀看破 10 億的 YouTube 影片 <a class="cite" href="#S6">S6</a><a class="cite" href="#S2">S2</a>。</li>
+<li>Billboard Hot 100 最高第 2 名，當時南韓歌手最高紀錄 <a class="cite" href="#S6">S6</a>。</li>
+<li>2012 年底在 30 多個國家登上榜首 <a class="cite" href="#S6">S6</a>。</li>
+<li>聯合國秘書長潘基文稱它是「世界和平的力量」<a class="cite" href="#S6">S6</a>。</li>
+</ul>
+<h2>YouTube 讓 K-pop 出海</h2>
+<ul>
+<li>Wonder Girls、BIGBANG、2NE1、BTS、BLACKPINK 都藉 YouTube 擴散到全球 <a class="cite" href="#S2">S2</a>。</li>
+<li>英文歌名在韓國前 50 名的比例：1995 年 8%、2000 年 30%、2010 年 44% <a class="cite" href="#S1">S1</a>。</li>
+</ul>
+<h2>BTS 與 BLACKPINK</h2>
+<ul>
+<li>BTS：12 座告示牌音樂獎、11 座全美音樂獎、5 次葛萊美提名 <a class="cite" href="#S2">S2</a>。</li>
+<li>BTS 與 Stray Kids 各有 6 張 Billboard 200 冠軍專輯 <a class="cite" href="#S3">S3</a>。</li>
+<li>2018 年後，偶像團體共拿下 19 張 Billboard 200 冠軍專輯 <a class="cite" href="#S3">S3</a>。</li>
+<li>BLACKPINK 的 Born Pink 世界巡演（2022–23）是亞洲藝人票房最高的巡演 <a class="cite" href="#S2">S2</a>。</li>
+<li>2023 年 BLACKPINK 成為第一個擔任 Coachella 壓軸的亞洲藝人 <a class="cite" href="#S2">S2</a>。</li>
+</ul>
+<p>相關頁：<a class="wl" href="#timeline">timeline</a>、<a class="wl" href="#kpop-overview">kpop-overview</a></p></article>
+<article id="open-questions" data-kind="wiki" hidden><div class="path">wiki/open-questions.md</div><pre class="fm">title: 待查證與來源衝突
+sources: [S1, S2, S3, S4, S5, S6]
+updated: 2026-11-12</pre><h1>待查證與來源衝突</h1>
+<p>這一頁收集「來源之間互相矛盾」或「可信度不足」的項目。依 schema 規則，這裡的內容<strong>不進簡報</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>問題</th>
+<th>來源</th>
+<th>處理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q1</td>
+<td>YG 創辦人英文拼法：Yang Hyun-suk vs Yang Hyun-seok</td>
+<td><a class="cite" href="#S5">S5</a> vs <a class="cite" href="#S1">S1</a><a class="cite" href="#S2">S2</a></td>
+<td>中文統一「梁鉉錫」</td>
+</tr>
+<tr>
+<td>Q2</td>
+<td>〈江南 Style〉屬於 EP《Psy 6 (Six Rules), Part 1》還是第 6 張正規專輯？頁面自相矛盾</td>
+<td><a class="cite" href="#S6">S6</a></td>
+<td>簡報不提專輯歸屬</td>
+</tr>
+<tr>
+<td>Q3</td>
+<td>M Countdown 配分加總 110、人氣歌謠加總 115，不是 100</td>
+<td><a class="cite" href="#S4">S4</a></td>
+<td>簡報改用加總正確的 Music Bank</td>
+</tr>
+<tr>
+<td>Q4</td>
+<td>「BTS 是第一個在葛萊美表演的外國團體」措辭不合理</td>
+<td><a class="cite" href="#S3">S3</a></td>
+<td>不採用</td>
+</tr>
+<tr>
+<td>Q5</td>
+<td>2024 四大公司營收、2014 未成年保護法、忙內定義、ARMY 都出自模型摘要段，非逐字</td>
+<td><a class="cite" href="#S1">S1</a><a class="cite" href="#S2">S2</a></td>
+<td>標<span class="pend">待查證</span>，不進簡報</td>
+</tr>
+<tr>
+<td>Q6</td>
+<td>K-pop_fandom 網址抓回的是 K-pop 主條目</td>
+<td>拒收 S4b（內容=<a class="cite" href="#S1">S1</a>）</td>
+<td>應援棒、應援口號無來源 → 不寫</td>
+</tr>
+</tbody>
+</table>
+<h2>下次 ingest 建議</h2>
+<ul>
+<li>找一篇真正講粉絲文化（應援棒、應援口號、粉絲名）的來源補 <a class="wl" href="#idol-terms-fandom">idol-terms-fandom</a>。</li>
+<li>找 HYBE 官方或財報來源，把 Q5 的營收數字轉為可信。</li>
+</ul></article>
+<article id="log" data-kind="wiki" hidden><div class="path">wiki/log.md</div><h1>Log（append-only）</h1>
+<h2>[2026-11-12] discuss | 主題確定：K-pop 韓團入門（D1 第一輪）</h2>
+<h2>[2026-11-12] fetch | 抓取 7 個網址；S4b K-pop_fandom 內容與 S1 重複 → 拒收</h2>
+<h2>[2026-11-12] discuss | 讀完 S1–S6 後提案架構；使用者改為精簡 6–7 頁、觀眾=輕度粉絲（D1 第二輪、D2）</h2>
+<h2>[2026-11-12] ingest | S1 → kpop-overview, timeline, agencies-trainees, idol-terms-fandom</h2>
+<h2>[2026-11-12] ingest | S2 → kpop-overview, timeline, global-milestones</h2>
+<h2>[2026-11-12] ingest | S3 → agencies-trainees, idol-terms-fandom, global-milestones</h2>
+<h2>[2026-11-12] ingest | S4 → music-shows, idol-terms-fandom, timeline</h2>
+<h2>[2026-11-12] ingest | S5 → timeline, agencies-trainees</h2>
+<h2>[2026-11-12] ingest | S6 → global-milestones, music-shows, timeline</h2>
+<h2>[2026-11-12] ingest | 建立 open-questions（Q1–Q6）與 index</h2>
+<h2>[2026-11-12] lint | run1：21 錯誤 + 7 警告；判定 checker 自身 bug 10 項（萬單位換算、年份誤判、HTML 文字黏連）→ 修 checker</h2>
+<h2>[2026-11-12] lint | run2：12 錯誤（全為真錯誤）→ 修 frontmatter 來源同步、表格逐列標來源、簡報 s1/s2/s8 追溯</h2>
+<h2>[2026-11-12] review | run3：規則檢查 0 錯誤後做語意審查（人工＋LLM 對照 wiki），找到 2 處：s5 把「嘻哈」併入「引入」的過度宣稱、s9 加了 wiki 沒有的評論 → 修正</h2>
+<h2>[2026-11-12] lint | 新增 tools/test_check.py（先測檢查器）；run4：check.py 0 錯誤 0 警告，16 頁簡報全數可追溯</h2></article>
+<article id="S1" data-kind="raw" hidden><div class="path">raw/</div><pre class="fm">id: S1
+title: K-pop (Wikipedia)
+url: https://en.wikipedia.org/wiki/K-pop
+fetched: 2026-11-12
+fetch_status: ok (87,818 chars; first ~40k verbatim, rest model summary)
+confidence: verbatim part = high; [summary] lines = medium</pre><h1>S1 — K-pop</h1>
+<h2>Definitions</h2>
+<ul>
+<li>K-pop = South Korean popular music ("Korean popular music"); today mostly means teen idol girl groups and boy bands emphasising visuals and performance.</li>
+<li>Gayo = Korean domestic term for pop.</li>
+<li>Comeback = any promotional cycle for a new single, even without a hiatus.</li>
+<li>Debut showcase; concept (visual/musical theme); "point dance" (hooking repeated move); formation changes (jaribakkum).</li>
+<li>Sub-units: members form sub-groups (e.g. Super Junior-K.R.Y., Super Junior-M).</li>
+<li>[summary] Leader, maknae (youngest member), title track, bonsang/daesang awards.</li>
+</ul>
+<h2>Timeline</h2>
+<ul>
+<li>1885 Henry Appenzeller teaches changga songs.</li>
+<li>1925 first known Korean pop album.</li>
+<li>1959 Kim Sisters: first Korean act to release an album in the US pop market.</li>
+<li>1990s genre emerges as youth subculture; idol-training model develops.</li>
+<li>1992 Seo Taiji and Boys debut.</li>
+<li>1995 SM Entertainment founded by Lee Soo-man; H.O.T. and S.E.S. called "first generation".</li>
+<li>1996 YG (Yang Hyun-seok) / 1997 JYP (Park Jin-young) founded.</li>
+<li>1999-10-09 earliest known use of "K-pop", in Billboard.</li>
+<li>2000s TVXQ and BoA succeed in Japan.</li>
+<li>2018 ~190 South Korean performers incl. Red Velvet perform in Pyongyang.</li>
+<li>2022 Korean Music Awards creates a K-pop category.</li>
+</ul>
+<h2>Numbers</h2>
+<ul>
+<li>2019: South Korea 6th largest music market.</li>
+<li>2012: WSJ — training one SM idol costs ~US$3 million.</li>
+<li>English titles in top-50: 8% (1995) → 30% (2000) → 18% (2005) → 44% (2010).</li>
+<li>[summary] 2024 revenue (USD m): SM 708, YG 250, JYP 450, HYBE 1,653.</li>
+<li>[summary] SM trainee period 1–6 years, avg 3.</li>
+</ul>
+<h2>Other</h2>
+<ul>
+<li>Trainees recruited via agency auditions, online auditions, street casting; binding contracts; training criticised as "robotic".</li>
+<li>Four companies dominate: SM, YG, JYP, HYBE.</li>
+<li>Hybrid sound: Western dance, hip-hop, R&amp;B, rock + Korean performance style.</li>
+<li>Government promotes K-pop as soft power.</li>
+<li>[summary] 2014 law protects performers under 19; 2017 trainee-contract rules.</li>
+<li>Page does NOT explain music-show scoring.</li>
+</ul></article>
+<article id="S2" data-kind="raw" hidden><div class="path">raw/</div><pre class="fm">id: S2
+title: Korean wave / Hallyu (Wikipedia)
+url: https://en.wikipedia.org/wiki/Korean_wave
+fetched: 2026-11-12
+fetch_status: ok (86,239 chars; first ~40k verbatim, rest model summary)
+confidence: verbatim = high; [summary] = medium</pre><h1>S2 — Korean wave (Hallyu 韓流)</h1>
+<h2>Definitions</h2>
+<ul>
+<li>Hallyu (한류): rising global interest in South Korean pop culture since the 1990s — K-pop, K-dramas, K-beauty, K-food, film.</li>
+<li>From han ("Korean") + ryu ("flow/wave"). Chinese term hánliú first appeared 1999-11-19 in Beijing Youth Daily.</li>
+<li>Hallyu 1.0: late 1990s–early 2000s, mainly TV dramas in Asia.</li>
+<li>Hallyu 2.0 / "New Korean Wave": from 2008, driven by social media and K-pop.</li>
+</ul>
+<h2>Timeline</h2>
+<ul>
+<li>1993 government shifts to cultural commercialisation.</li>
+<li>1997 China's first wave via K-dramas; 1999 Basic Law for Promoting Cultural Industries.</li>
+<li>2000 Taiwan wave starts with dramas Fireworks / Autumn in My Heart.</li>
+<li>2002–03 BoA enters Japan; Winter Sonata airs in Japan.</li>
+<li>2008 cultural exports exceed imports for the first time; Hallyu 2.0 begins.</li>
+<li>2012-12-21 Gangnam Style reaches 1 billion YouTube views.</li>
+<li>2019 Parasite wins Best Picture (Oscars).</li>
+<li>2021 "hallyu" and "Korean Wave" added to the OED.</li>
+<li>2023 BLACKPINK first Asian act to headline Coachella.</li>
+</ul>
+<h2>Numbers</h2>
+<ul>
+<li>2012 gov. estimate of Hallyu economic value: US$83.2 billion.</li>
+<li>TV exports: US$8.3m (1997) → US$151m (2007).</li>
+<li>BTS: 12 Billboard Music Awards, 11 AMAs, 5 Grammy nominations.</li>
+<li>Born Pink World Tour (2022–23): highest-grossing tour by an Asian act.</li>
+</ul>
+<h2>Other</h2>
+<ul>
+<li>Agencies: SM (1995, Lee Soo-man), YG (1996, Yang Hyun-seok), JYP (1997, Park Jin-young) — grew after 1997 crisis.</li>
+<li>Wonder Girls, BigBang, 2NE1, BTS, BLACKPINK spread via YouTube.</li>
+<li>Fan activity: dance covers, reaction channels, real-time streaming and voting.</li>
+<li>[summary] ARMY = BTS fandom name.</li>
+</ul></article>
+<article id="S3" data-kind="raw" hidden><div class="path">raw/</div><pre class="fm">id: S3
+title: Korean idol (Wikipedia)
+url: https://en.wikipedia.org/wiki/Korean_idol
+fetched: 2026-11-12
+fetch_status: ok (35,096 chars; read in full)
+confidence: high</pre><h1>S3 — Korean idol (아이돌)</h1>
+<h2>Definitions</h2>
+<ul>
+<li>Idol: K-pop entertainer (group member or soloist) working under an agency's "highly managed star system".</li>
+<li>Trained in dance, vocals, foreign languages; a blend of visuals, music, fashion.</li>
+<li>"Parasocial kin": fans form familial bonds with idols.</li>
+<li>"Cultural technology": SM's label for its global audition/production method.</li>
+<li>"Wholesome image" required of trainees.</li>
+</ul>
+<h2>Timeline</h2>
+<ul>
+<li>~1939 Jeogori Sisters debut (early vocal group).</li>
+<li>1990s Lee Soo-man adopts trainee model from Japan's Johnny Kitagawa, inspired by New Kids on the Block.</li>
+<li>2009 TVXQ challenges SM contract terms.</li>
+<li>2018 onward 19 No.1 Billboard 200 albums by idol groups.</li>
+</ul>
+<h2>Numbers</h2>
+<ul>
+<li>SM receives ~300,000 applicants in nine countries a year.</li>
+<li>2012 WSJ: training one Girls' Generation member cost US$3 million.</li>
+<li>2013 avg idol annual earnings KR₩46.74m (~US$42,000), up from KR₩26.97m in 2010.</li>
+<li>Military service: men 18–35, 18 months.</li>
+<li>BTS and Stray Kids: six No.1 Billboard 200 albums each.</li>
+</ul>
+<h2>Other</h2>
+<ul>
+<li>Trainee period "indefinite" (months to years): vocal, dance, language classes, living together.</li>
+<li>Reports of pressure for plastic surgery and harsh weight limits.</li>
+<li>Dating bans common; decade-long contracts criticised.</li>
+<li>SM first to market "bands as brands".</li>
+<li>Fan activities: fan meetings, fan sites, fan cafés, KCON.</li>
+<li>Digest wording: "BTS first foreign group to perform at the Grammys" — ambiguous/likely mis-phrased (many non-US acts performed before); flagged, NOT used.</li>
+</ul></article>
+<article id="S4" data-kind="raw" hidden><div class="path">raw/</div><pre class="fm">id: S4
+title: Music programs of South Korea (Wikipedia)
+url: https://en.wikipedia.org/wiki/Music_programs_of_South_Korea
+fetched: 2026-11-12
+fetch_status: ok (37,257 chars; read in full)
+confidence: high</pre><h1>S4 — Music programs of South Korea</h1>
+<h2>Definitions</h2>
+<ul>
+<li>Music program: weekly TV show where artists perform to promote songs; each has a chart/voting system that picks a weekly No.1 ("win").</li>
+<li>Debut stage: first performance on a show. Comeback stage: first performance of new songs, starting a promotional cycle.</li>
+<li>Triple crown: songs with 3 wins are excluded afterwards (some shows use 5).</li>
+</ul>
+<h2>Weekly schedule</h2>
+<table>
+<thead>
+<tr>
+<th>Day</th>
+<th>Show</th>
+<th>Channel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tue</td>
+<td>The Show</td>
+<td>SBS FunE</td>
+</tr>
+<tr>
+<td>Wed</td>
+<td>Show Champion</td>
+<td>MBC M</td>
+</tr>
+<tr>
+<td>Thu</td>
+<td>M Countdown</td>
+<td>Mnet</td>
+</tr>
+<tr>
+<td>Fri</td>
+<td>Music Bank</td>
+<td>KBS2</td>
+</tr>
+<tr>
+<td>Sat</td>
+<td>Show! Music Core</td>
+<td>MBC</td>
+</tr>
+<tr>
+<td>Sun</td>
+<td>Inkigayo</td>
+<td>SBS</td>
+</tr>
+</tbody>
+</table>
+<h2>Scoring (as printed on page)</h2>
+<ul>
+<li>Music Bank: digital 65, album 5, KBS broadcast 20, panel survey 10 (=100).</li>
+<li>Show Champion: digital 35, album 15, pre-vote 20, broadcast 20, SNS 10 (=100).</li>
+<li>M Countdown: digital 45, album 15, MV views 15, pre-vote 15, broadcast 10, live vote 10 (=110 as printed).</li>
+<li>Inkigayo: digital 55, SNS/YouTube 30, album 10, advance votes 5, on-air 10, live 5 (=115 as printed).</li>
+</ul>
+<h2>Milestones</h2>
+<ul>
+<li>2012 Gangnam Style wins Music Bank 10 consecutive weeks (record; prior: Gee, 9 weeks, 2009).</li>
+<li>2015 Girls' Generation first act with 100 music-show wins.</li>
+<li>2020 BTS "Dynamite" 32 wins.</li>
+</ul>
+<h2>Other</h2>
+<ul>
+<li>Fans can attend recordings free by applying; no filming.</li>
+<li>1998-06-16 Music Bank begins; 2004 M Countdown begins.</li>
+</ul></article>
+<article id="S5" data-kind="raw" hidden><div class="path">raw/</div><pre class="fm">id: S5
+title: Seo Taiji and Boys (Wikipedia)
+url: https://en.wikipedia.org/wiki/Seo_Taiji_and_Boys
+fetched: 2026-11-12
+fetch_status: ok (36,071 chars; read in full)
+confidence: high</pre><h1>S5 — Seo Taiji and Boys (서태지와 아이들)</h1>
+<ul>
+<li>Trio active 1992–1996: Seo Taiji (leader, songwriter), Yang Hyun-suk (rap, choreography), Lee Juno (choreography).</li>
+<li>Credited with introducing rap into Korean pop and using social critique against censorship.</li>
+<li>1992-03-23 debut album; 1992-04-11 MBC talent show debut with "Nan Arayo (I Know)" — jury gave lowest rating, but song became a hit.</li>
+<li>1993 second album: first "double million seller" in Korean history; group banned from KBS-TV for earrings, ripped jeans, dreadlocks.</li>
+<li>1995 "Regret of the Times" banned by ethics committee → fan protests → 1996-06 pre-censorship abolished.</li>
+<li>1996-01 group retires; 1996 Yang founds YG Entertainment.</li>
+<li>Influence: hip-hop fashion, breakdance as performance, rise of agencies forming H.O.T., Sechs Kies, Shinhwa.</li>
+<li>Album sales: I 1.8M, II 2.2M, III 1.6M, IV 2.4M.</li>
+<li>2017 BTS remakes "Come Back Home".</li>
+<li>Name spelling: this page = "Yang Hyun-suk"; S1/S2 = "Yang Hyun-seok".</li>
+</ul></article>
+<article id="S6" data-kind="raw" hidden><div class="path">raw/</div><pre class="fm">id: S6
+title: Gangnam Style (Wikipedia)
+url: https://en.wikipedia.org/wiki/Gangnam_Style
+fetched: 2026-11-12
+fetch_status: ok (84,026 chars; first ~40k verbatim, rest model summary)
+confidence: verbatim = high; [summary] = medium</pre><h1>S6 — Gangnam Style (강남스타일)</h1>
+<ul>
+<li>K-pop song by Psy, released 2012-07-15 via YG Entertainment; title refers to the lavish lifestyle of Seoul's Gangnam district. Signature "horse dance".</li>
+<li>2012-09-01 most-viewed K-pop video on YouTube (passing "Gee").</li>
+<li>2012-11-24 most-viewed YouTube video overall (passing "Baby").</li>
+<li>2012-12-21 first YouTube video to reach 1 billion views.</li>
+<li>Billboard Hot 100 peak No.2 — then highest by a South Korean artist.</li>
+<li>Topped charts in 30+ countries by end of 2012.</li>
+<li>UN Secretary-General Ban Ki-moon called it "a force for world peace".</li>
+<li>[summary] UK No.1 on 2012-10-06.</li>
+<li>Page conflict: infobox says single from EP "Psy 6 (Six Rules), Part 1"; lead says lead single of 6th studio album.</li>
+</ul></article>
+<article id="rejected" data-kind="raw" hidden><div class="path">raw/</div><pre class="fm">id: S4b (REJECTED)
+url: https://en.wikipedia.org/wiki/K-pop_fandom
+fetched: 2026-11-12
+fetch_status: HTTP 200 but content identical to S1 (same length 87,818 chars, same opening)
+decision: rejected at ingest — duplicate of S1, not a fandom article. Not counted toward the 5-source minimum.</pre><p>Fandom facts that do appear elsewhere were taken from S2 (streaming/voting, ARMY) and S3 (fan meetings, fan cafés, parasocial kin). Lightsticks / fan chants have NO source in this wiki and are therefore excluded from the wiki and slides (see wiki/open-questions.md).</p></article>
+<article id="D1-scope" data-kind="disc" hidden><div class="path">discussions/</div><h1>D1 — 主題與範圍討論（2026-11-12）</h1>
+<h2>第一輪（選主題）</h2>
+<ul>
+<li>AI 提案：會員集點行銷 / AI Agents / RAG / K-pop 韓團入門</li>
+<li>使用者決定：<strong>K-pop 韓團入門</strong>（延續上週韓團網站作業）</li>
+<li>交付：線上連結＋可下載原始檔</li>
+</ul>
+<h2>第二輪（讀完來源後討論架構）</h2>
+<p>AI 先讀完 S1–S6，整理出每篇重點後提案 11 頁架構＋待查證頁：
+- 概念頁 7、實體頁 3、時間線 1、待查證 1</p>
+<p>使用者回覆：
+- 架構 → <strong>精簡為 6–7 頁</strong>（合併術語與粉絲、合併實體頁）
+- 觀眾 → <strong>輕度粉絲</strong>：聽過幾團，想知道產業背後怎麼運作 → 簡報偏「產業與數據」</p>
+<h2>討論中發現的問題（生成前就先處理）</h2>
+<table>
+<thead>
+<tr>
+<th>問題</th>
+<th>決策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>K-pop_fandom 網址抓回來的內容 = K-pop 主條目（同長度、同開頭）</td>
+<td>拒收（raw/_rejected-…），不算入 5 篇；粉絲資訊改由 S2、S3 提供</td>
+</tr>
+<tr>
+<td>「應援棒、應援口號」沒有任何來源提到</td>
+<td>不寫入 Wiki，也不進簡報（寧缺勿濫）</td>
+</tr>
+<tr>
+<td>YG 創辦人拼法：S5 = Yang Hyun-suk，S1/S2 = Yang Hyun-seok</td>
+<td>中文統一寫「梁鉉錫」，衝突記入 open-questions</td>
+</tr>
+<tr>
+<td>江南 Style 是 EP 單曲還是第 6 張正規專輯主打？S6 頁內自相矛盾</td>
+<td>簡報不提專輯歸屬</td>
+</tr>
+<tr>
+<td>M Countdown／人氣歌謠 配分加總不等於 100</td>
+<td>簡報只用加總正確的 Music Bank 為例，其他記入 open-questions</td>
+</tr>
+<tr>
+<td>S1/S6 後半段為摘要（[summary]）</td>
+<td>該類事實標 <span class="pend">待查證</span>，不進簡報</td>
+</tr>
+</tbody>
+</table>
+<h2>最終頁面（7 頁 + index + log）</h2>
+<ol>
+<li>kpop-overview — K-pop 與韓流總覽</li>
+<li>timeline — 發展大事記（含徐太志與孩子們）</li>
+<li>agencies-trainees — 四大經紀公司與練習生制度（含爭議）</li>
+<li>idol-terms-fandom — 偶像術語與粉絲文化</li>
+<li>music-shows — 音樂節目與一位計分</li>
+<li>global-milestones — 走向全球（江南 Style、BTS、BLACKPINK）</li>
+<li>open-questions — 待查證與來源衝突</li>
+</ol></article>
+<article id="D2-ingest-notes" data-kind="disc" hidden><div class="path">discussions/</div><h1>D2 — 逐篇 ingest 前討論筆記</h1>
+<table>
+<thead>
+<tr>
+<th>來源</th>
+<th>最重要的重點</th>
+<th>要更新的 Wiki 頁</th>
+<th>衝突/疑點</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1 K-pop</td>
+<td>定義、回歸(comeback)、子團、四大公司、1999 Billboard 首見 "K-pop" 一詞、練習生成本 300 萬美元</td>
+<td>overview, timeline, agencies-trainees, idol-terms-fandom</td>
+<td>後半為摘要；HYBE 營收等數字標待查證</td>
+</tr>
+<tr>
+<td>S2 韓流</td>
+<td>Hallyu 詞源（1999 北京青年報）、1.0/2.0、2008 文化出口首超進口、政府推動</td>
+<td>overview, timeline, global-milestones</td>
+<td>ARMY 只出現在摘要段</td>
+</tr>
+<tr>
+<td>S3 韓國偶像</td>
+<td>明星系統、練習生（舞蹈/歌唱/外語）、SM 每年 30 萬人報名、戀愛禁令、長約爭議、parasocial kin</td>
+<td>agencies-trainees, idol-terms-fandom</td>
+<td>「BTS first foreign group at Grammys」措辭可疑 → 不用</td>
+</tr>
+<tr>
+<td>S4 音樂節目</td>
+<td>週二到週日六個節目、出道舞台/回歸舞台、計分組成、三冠王規則</td>
+<td>music-shows, idol-terms-fandom</td>
+<td>兩個節目配分加總 ≠ 100</td>
+</tr>
+<tr>
+<td>S5 徐太志與孩子們</td>
+<td>1992 出道、引入饒舌、反審查、1996 解散後梁鉉錫創 YG</td>
+<td>timeline, agencies-trainees</td>
+<td>梁鉉錫英文拼法不一</td>
+</tr>
+<tr>
+<td>S6 江南 Style</td>
+<td>2012 首支 YouTube 10 億觀看、Billboard Hot 100 第 2、Music Bank 連 10 週</td>
+<td>global-milestones, music-shows</td>
+<td>EP/正規專輯矛盾</td>
+</tr>
+<tr>
+<td>S4b 粉絲（拒收）</td>
+<td>內容與 S1 重複</td>
+<td>—</td>
+<td>抓取錯誤</td>
+</tr>
+</tbody>
+</table></article>
+<article id="schema" data-kind="disc" hidden><div class="path">discussions/</div><h1>K-pop 入門 LLM Wiki — Schema（給 LLM 的維護規則）</h1>
+<p>本 Wiki 採 Karpathy「LLM Wiki」模式：LLM 不是每次都從原始資料重新檢索，而是把資料「編譯」成一份持續維護、互相連結的 Markdown Wiki，之後所有產出（簡報）都只從 Wiki 取材。</p>
+<h2>三層結構</h2>
+<ul>
+<li><code>raw/</code>：原始來源摘錄（S1–S6）。<strong>唯讀</strong>，只新增不修改內容；每篇有 frontmatter（id、url、fetch_status、confidence）。</li>
+<li><code>discussions/</code>：每次 ingest 前的「先討論」紀錄（重點、疑問、決策）。</li>
+<li><code>wiki/</code>：LLM 撰寫與維護的頁面。<code>index.md</code> 為目錄，<code>log.md</code> 為操作紀錄（append-only）。</li>
+</ul>
+<h2>寫作規則</h2>
+<ol>
+<li>先討論、後生成：ingest 一篇來源前，先在 <code>discussions/</code> 寫下「這篇最重要的 3–5 點、跟現有頁面的關係、有無衝突」，與使用者確認方向後才改 wiki。</li>
+<li>每一條事實句尾必須標來源，如 <code><a class="cite" href="#S3">S3</a></code>；多來源寫 <code><a class="cite" href="#S1">S1</a><a class="cite" href="#S2">S2</a></code>。沒有來源的句子不准寫。</li>
+<li>來源標 <code>[summary]</code>（模型摘要段落，非逐字）的事實，只能在句尾加 <code><span class="pend">待查證</span></code>，且不得進簡報。</li>
+<li>來源互相矛盾時，不擇一，寫進 <code>open-questions.md</code>。</li>
+<li>頁面間用 <code>&lt;a class="wl" href="#頁面檔名"&gt;頁面檔名&lt;/a&gt;</code> 連結；新增頁面必須同步更新 <code>index.md</code>。</li>
+<li>每次動作在 <code>log.md</code> 追加一行：<code>## [日期] ingest|query|lint | 說明</code>。</li>
+</ol>
+<h2>簡報產生規則</h2>
+<ul>
+<li>簡報每一頁 <code>&lt;section&gt;</code> 必須有 <code>data-wiki="頁面檔名"</code>，指出內容出自哪一頁 Wiki。</li>
+<li>簡報上出現的每一個數字（年份、數量、百分比）必須能在該 Wiki 頁中找到。</li>
+<li>由 <code>tools/check.py</code> 自動檢查，不通過就回到對應節點重做。</li>
+</ul></article></main>
+</div>
+<script>
+(function(){
+  var A=[].slice.call(document.querySelectorAll('article'));
+  function show(){var h=location.hash.slice(1)||'index';var hit=A.some(function(a){return a.id===h});if(!hit)h='index';
+    A.forEach(function(a){a.hidden=a.id!==h});
+    document.querySelectorAll('nav a').forEach(function(l){l.toggleAttribute('aria-current',l.dataset.k===h);if(l.dataset.k===h)l.setAttribute('aria-current','page')});
+    window.scrollTo(0,0)}
+  window.addEventListener('hashchange',show);show();
+})();
+</script>
+
+</body>
+</html>

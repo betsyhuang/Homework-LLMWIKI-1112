@@ -1,0 +1,69 @@
+<title>K-pop 入門 LLM Wiki</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: wiki reader — left index rail, one article at a time, source chips link back to raw */
+:root{
+  --bg:#f7f5fa; --surface:#ffffff; --ink:#1c1726; --muted:#6a6378; --line:#e3dfeb;
+  --accent:#c81d6a; --accent-soft:#fbe3ee; --teal:#0d7480; --teal-soft:#dff1f2; --warn:#9a5b00; --warn-soft:#fdf0d9;
+  --display:"Archivo Black","Noto Sans TC",system-ui,sans-serif;
+  --body:"Noto Sans TC",system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#131019; --surface:#1d1926; --ink:#f1edf7; --muted:#a59db4; --line:#302a3d;
+  --accent:#ff5c9e; --accent-soft:#3a1628; --teal:#4cc6d1; --teal-soft:#123237; --warn:#f0b75c; --warn-soft:#3a2a10; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#131019; --surface:#1d1926; --ink:#f1edf7; --muted:#a59db4; --line:#302a3d;
+  --accent:#ff5c9e; --accent-soft:#3a1628; --teal:#4cc6d1; --teal-soft:#123237; --warn:#f0b75c; --warn-soft:#3a2a10; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.7}
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px;padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{grid-column:1/-1;display:flex;flex-direction:column;gap:6px;border-bottom:1px solid var(--line);padding-bottom:18px}
+header .eb{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+header h1{font-family:var(--display);font-size:clamp(1.8rem,4vw,2.6rem);margin:0;line-height:1.15}
+header p{margin:0;color:var(--muted);max-width:70ch}
+nav{display:flex;flex-direction:column;gap:18px;position:sticky;top:16px;align-self:start}
+.ng{display:flex;flex-direction:column;gap:2px}
+.nl{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+nav a{color:var(--ink);text-decoration:none;padding:4px 10px;border-radius:6px;font-size:14px}
+nav a:hover{background:var(--surface)}
+nav a[aria-current="page"]{background:var(--accent-soft);color:var(--accent);font-weight:700}
+main{min-width:0}
+article{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px clamp(16px,3vw,36px)}
+article h1{font-family:var(--display);font-size:1.8rem;margin:.2em 0 .4em;line-height:1.2;text-wrap:balance}
+article h2{font-size:1.2rem;margin:1.6em 0 .5em;padding-top:.4em;border-top:1px solid var(--line)}
+article p,article li{max-width:68ch}
+article ul{padding-left:1.2em}
+.path{font-family:var(--mono);font-size:12px;color:var(--teal)}
+.fm{font-family:var(--mono);font-size:12px;background:var(--bg);border-radius:8px;padding:10px 12px;color:var(--muted);white-space:pre-wrap;overflow-x:auto;margin:8px 0 0}
+table{border-collapse:collapse;width:100%;font-size:14px;display:block;overflow-x:auto}
+th,td{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+a{color:var(--accent)}
+a.cite{display:inline-block;font-family:var(--mono);font-size:11px;padding:0 6px;border-radius:99px;background:var(--teal-soft);color:var(--teal);text-decoration:none;vertical-align:1px}
+a.wl{font-weight:700}
+.pend{font-size:11px;padding:1px 6px;border-radius:99px;background:var(--warn-soft);color:var(--warn);font-weight:700}
+blockquote{margin:1em 0;padding:8px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0}
+code{font-family:var(--mono);font-size:.9em}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:760px){.wrap{grid-template-columns:1fr}nav{position:static;flex-direction:row;flex-wrap:wrap;gap:12px}.ng{flex:1 1 100%}.ng{flex-direction:row;flex-wrap:wrap}.nl{flex-basis:100%}}
+</style>
+<div class="wrap">
+ <header>
+  <span class="eb">LLM Wiki · 6 篇來源 · 7 個頁面</span>
+  <h1>K-pop 入門 LLM Wiki</h1>
+  <p>依 Karpathy LLM Wiki 模式建立：raw/ 原始來源 → discussions/ 先討論 → wiki/ 由 LLM 維護的頁面。每條事實後面的 <a class="cite" href="#S1">S1</a> 標籤可點回原始來源。</p>
+ </header>
+ <nav aria-label="Wiki 目錄">{{NAV}}</nav>
+ <main>{{PAGES}}</main>
+</div>
+<script>
+(function(){
+  var A=[].slice.call(document.querySelectorAll('article'));
+  function show(){var h=location.hash.slice(1)||'index';var hit=A.some(function(a){return a.id===h});if(!hit)h='index';
+    A.forEach(function(a){a.hidden=a.id!==h});
+    document.querySelectorAll('nav a').forEach(function(l){l.toggleAttribute('aria-current',l.dataset.k===h);if(l.dataset.k===h)l.setAttribute('aria-current','page')});
+    window.scrollTo(0,0)}
+  window.addEventListener('hashchange',show);show();
+})();
+</script>
